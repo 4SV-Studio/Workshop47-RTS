@@ -3,6 +3,7 @@ package com.solegendary.reignofnether.registrars;
 import com.solegendary.reignofnether.ReignOfNether;
 import com.solegendary.reignofnether.blocks.GarrisonBlockEntity;
 import com.solegendary.reignofnether.blocks.RTSStructureBlockEntity;
+import com.solegendary.reignofnether.blocks.SubBlockEntity;
 import com.solegendary.reignofnether.blocks.WraithSnowBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -38,6 +39,11 @@ public class BlockEntityRegistrar {
                     () -> BlockEntityType.Builder.of(WraithSnowBlockEntity::new,
                             BlockRegistrar.WRAITH_SNOW_LAYER.get()).build(null)
             );
+
+    public static final RegistryObject<BlockEntityType<SubBlockEntity>> SUB_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("suit_stand_entity", () ->
+                    BlockEntityType.Builder.of(SubBlockEntity::new,
+                            BlockRegistrar.SUB_BLOCK.get()).build(null));
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> blockEntity) {
         return BLOCK_ENTITIES.register(name, blockEntity);

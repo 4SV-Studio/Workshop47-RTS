@@ -216,6 +216,8 @@ public class BlockRegistrar {
         return true;
     }
 
+    public static final RegistryObject<Block> SUB_BLOCK = registerBlock("sub_block", () -> new SubBlock(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), CreativeModeTabs.OP_BLOCKS);
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, ResourceKey<CreativeModeTab> tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, tab);
