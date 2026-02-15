@@ -1,9 +1,12 @@
 package com.solegendary.reignofnether.blocks;
 
+import com.solegendary.reignofnether.gui.ControllerMenu;
 import com.solegendary.reignofnether.registrars.BlockRegistrar;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -24,7 +27,10 @@ public class ControllerBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-
+        pPlayer.openMenu(new SimpleMenuProvider(
+                (id, inv, buf) -> new ControllerMenu(id, inv),
+                Component.literal("World Controller")
+        ));
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }

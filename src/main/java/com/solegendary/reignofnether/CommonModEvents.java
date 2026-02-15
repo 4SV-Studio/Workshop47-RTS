@@ -7,6 +7,7 @@ import com.solegendary.reignofnether.building.buildings.placements.PortalPlaceme
 import com.solegendary.reignofnether.entities.models.NecromancerProjectileModel;
 import com.solegendary.reignofnether.entities.renderers.ThrowableTntRenderer;
 import com.solegendary.reignofnether.entities.renderers.NecromancerProjectileRenderer;
+import com.solegendary.reignofnether.gui.ControllerScreen;
 import com.solegendary.reignofnether.guiscreen.TopdownGui;
 import com.solegendary.reignofnether.particles.BigEnchantParticle;
 import com.solegendary.reignofnether.registrars.*;
@@ -179,6 +180,8 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void onClientSetupEvent(FMLClientSetupEvent evt) {
         evt.enqueueWork(() -> MenuScreens.register(ContainerRegistrar.TOPDOWNGUI_CONTAINER.get(), TopdownGui::new));
+
+        MenuScreens.register(MenuRegistrar.CONTROLLER_MENU.get(), ControllerScreen::new);
     }
 
     @SubscribeEvent

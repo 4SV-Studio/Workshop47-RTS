@@ -76,6 +76,8 @@ public class ReignOfNether {
         MobEffectRegistrar.init(mlctx);
         ParticleRegistrar.init(mlctx);
 
+        MenuRegistrar.register();
+
         final ClientEventRegistrar clientRegistrar = new ClientEventRegistrar();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> clientRegistrar::registerClientEvents);
 

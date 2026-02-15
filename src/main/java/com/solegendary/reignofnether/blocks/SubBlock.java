@@ -34,7 +34,7 @@ public class SubBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         if (pLevel.getBlockEntity(pPos) instanceof SubBlockEntity subBlockEntity) {
-            pLevel.getBlockState(subBlockEntity.getMainPos()).onRemove(pLevel, pPos, pState, pMovedByPiston);
+            pLevel.removeBlock(subBlockEntity.getMainPos(), false);
         }
     }
 }

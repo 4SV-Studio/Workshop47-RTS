@@ -1,23 +1,24 @@
 package com.solegendary.reignofnether.gui;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 import net.minecraft.client.gui.components.Button;
 
 import static com.solegendary.reignofnether.ReignOfNether.MOD_ID;
 
-public class ControllerScreen extends Screen {
+public class ControllerScreen extends AbstractContainerScreen<ControllerMenu> {
     private static final int screenTextureWidth = 256; //TODO: put texture dimensions here
     private static final int screenTextureHeight = 256;
 
     private int screenWidthStart;
     private int screenHeightStart;
 
-    protected ControllerScreen() {
-        super(Component.literal("World Controller"));
+    public ControllerScreen(ControllerMenu menu, Inventory inv, Component title) {
+        super(menu, inv, title);
     }
 
     @Override
@@ -53,6 +54,11 @@ public class ControllerScreen extends Screen {
                 screenTextureWidth,
                 screenTextureHeight
         );
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1) {
+
     }
 
     @Override
