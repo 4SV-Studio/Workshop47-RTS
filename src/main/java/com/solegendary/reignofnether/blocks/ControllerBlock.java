@@ -1,5 +1,6 @@
 package com.solegendary.reignofnether.blocks;
 
+import com.solegendary.reignofnether.registrars.BlockRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -12,7 +13,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class ControllerBlock extends BaseEntityBlock {
-    protected ControllerBlock(Properties pProperties) {
+    public ControllerBlock(Properties pProperties) {
         super(pProperties);
     }
 
@@ -33,7 +34,12 @@ public class ControllerBlock extends BaseEntityBlock {
         super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
         BlockPos[] subBlocksPoses = getSubBlocks(pPos);
         for (BlockPos subBlockPos : subBlocksPoses) {
-            pLevel.getBlockState(subBlockPos).onPlace(pLevel, subBlockPos, pState, false);
+            if (!pLevel.getBlockState(subBlockPos).isAir()) {
+                pLevel.removeBlock(pPos, false);
+                return;
+            }
+
+            pLevel.setBlock(subBlockPos, BlockRegistrar.SUB_BLOCK.get().defaultBlockState(), 3);
             if (pLevel.getBlockEntity(subBlockPos) instanceof SubBlockEntity subBlockEntity) {
                 subBlockEntity.setMainPos(pPos);
             }
@@ -45,7 +51,9 @@ public class ControllerBlock extends BaseEntityBlock {
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         BlockPos[] subBlocksPoses = getSubBlocks(pPos);
         for (BlockPos subBlockPos : subBlocksPoses) {
-            pLevel.getBlockState(subBlockPos).onRemove(pLevel, subBlockPos, pState, false);
+            if (!pLevel.getBlockState(subBlockPos).is(BlockRegistrar.SUB_BLOCK.get())) continue;
+
+            pLevel.removeBlock(subBlockPos, false);
         }
     }
 
@@ -70,5 +78,4 @@ public class ControllerBlock extends BaseEntityBlock {
 
         return out;
     }
-
 }
